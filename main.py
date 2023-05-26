@@ -12,9 +12,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def hello_pubsub(event, context):
 
     #SET ENVIRONMENT VARIABLES
-    client_id = os.environ.get("client_id")
-    client_secret = os.environ.get("client_secret")
-    refresh_token = os.environ.get("refresh_token")
+    client_id = os.environ.get("CLIENT_ID")
+    client_secret = os.environ.get("CLIENT_SECRET")
+    refresh_token = os.environ.get("REFRESH_TOKEN")
 
     # DEFINE FUNCTION TO GET NEW ACCESS TOKEN
     def get_access_token(client_id, client_secret, refresh_token):
@@ -80,9 +80,7 @@ def hello_pubsub(event, context):
     data_json = json.dumps(data_dictionaries)
 
     storage_client = storage.Client()
-    bucket_name = 'lnr-strava-bucket'
-    bucket = storage_client.bucket(bucket_name)
-
+    bucket_name = os.environ.get("BUCKET_NAME")
 
     print("Uploading data to Google Cloud Storage...")
 
@@ -96,5 +94,5 @@ def hello_pubsub(event, context):
             print(e)
             return False
 
-    upload_to_bucket("strava_raw", data_json, "lnr-strava-bucket", "application/json")
+    upload_to_bucket("strava_raw", data_json, bucket_name, "application/json")
     print("Data upload completed.")
