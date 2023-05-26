@@ -41,5 +41,3 @@ To utilize this Google Cloud Function and automate the retrieval and storage of 
 
 * Test the function by triggering it manually or waiting for the scheduler to execute it.
 * Monitor the function's logs and Cloud Storage bucket to ensure the data is being fetched and stored correctly.
-
-I want to push this change
